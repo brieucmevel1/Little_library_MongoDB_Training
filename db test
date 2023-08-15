@@ -1,0 +1,106 @@
+term1:
+	sudo service mongod start
+	mongod --bind_ip_all
+term2:
+	mongosh
+	use little_library
+
+	db.books.find()
+	db.user.find()
+	db.podcast.find()
+	
+	db.books.find({ "Year": { $gt: 2000 } })
+	db.books.find({ $and: [{ "Available": true }, { "Year": { $gt: 2000 } }] })
+
+db.users.aggregate([
+  {
+    $project: {
+      "First Name": 1,
+      "Last Name": 1,
+      "Number of Possessed Items": { $size: "$Possessed" }
+    }
+  }
+])
+
+db.user.aggregate([
+  {
+    $match: {
+      $expr: { $gt: [{ $size: "$Possessed" }, 0] }
+    }
+  },
+  {
+    $project: {
+      "Title": 1,
+      "Author": 1,
+      "Possessed by Users": "$Possessed"
+    }
+  }
+])
+
+
+
+connection:
+	user:
+		see ownings:
+			books
+			podcasts
+		find/buy:
+			book
+			podcast
+		delete account
+		change pasword
+		
+	admin:
+		see:
+			book:
+				by name
+				all
+			podcast:
+				by name
+				all
+			account:
+				by name
+				all
+		edit:
+			book:
+				by name
+				all
+			podcast:
+				by name
+				all
+			account:
+				by name
+				all
+		create:
+			book
+			podcast
+			account
+		delete:
+			book:
+				by name
+				all
+			podcast:
+				by name
+				all
+			account:
+				by name
+				all
+			
+choix console api
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
