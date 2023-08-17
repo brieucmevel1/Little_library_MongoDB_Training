@@ -37,6 +37,7 @@ db.user.aggregate([
   }
 ])
 
+controler appelle tt les models
 
 
 connection:
@@ -85,22 +86,4 @@ connection:
 			account:
 				by name
 				all
-			
-choix console api
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			

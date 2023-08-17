@@ -1,7 +1,8 @@
 const { MongoClient } = require('mongodb');
-const main_admin = require('./little_library_admin.js');
-const main_user = require('./little_library_user.js');
-const get_answer = require('./ll_get_answer.js');
+const main_admin = require('./little_library_console/little_library_admin.js');
+const main_user = require('./little_library_console/little_library_user.js');
+const get_answer = require('./little_library_console/ll_get_answer.js');
+const main_api = require('./little_library_api/little_library_api.js');
 const readline = require('readline');
 
 const url = 'mongodb://localhost:27017';
@@ -15,13 +16,26 @@ const rl = readline.createInterface({
 });
 
 async function main() {
+    const role = await get_answer("What do you want to use? (console/api): ");
+    switch (role) {
+        case 'console':
+            await main_console();
+            break;
+        case 'api':
+            await main_api();
+            break;
+        default:
+            console.log(`Invalid choicre\n`);
+            await main();
+    }
+}
+
+async function main_console() {
     try {
         await client.connect();
         console.log('Connected to MongoDB');
         const db = client.db(db_name);
-        // choix console ou api(en utilisant express js(https://expressjs.com/fr/starter/hello-world.html))
-        const role = await get_answer("Are you an admin or a user? (admin/user): ");
-        
+        const role = await get_answer("Are you an admin or a user? (admin/user): ");        
         if (role === "admin") {
             await admin_actions(db);
         } else if (role === "user") {
