@@ -1,5 +1,5 @@
 const express = require('express');
-const api_controller = require('./api_controler');
+const api_controller = require('./api_controler.js');
 const router = express.Router();
 
 router.get('/users', api_controller.get_users);

@@ -1,6 +1,6 @@
-const user_model = require('./models/user_model');
-const book_model = require('./models/book_model');
-const podcast_model = require('./models/podcast_model');
+const user_model = require('./models/user_model.js');
+const book_model = require('./models/book_model.js');
+const podcast_model = require('./models/podcast_model.js');
 
 const get_users = async (req, res) => {
     try {
@@ -24,9 +24,11 @@ const create_user = async (req, res) => {
 };
 
 const get_user_by_username = async (req, res) => {
+    console.log(req.params); // Log the params object
     const { username } = req.params;
+    console.log('Username:', username);
     try {
-        const user = await user_model.get_user_by_username(username);
+        const user = await user_model.db_get_user_by_username(username); // Corrected access to user_model function
         if (user) {
             res.json(user);
         } else {

@@ -28,11 +28,14 @@ async function create_user(user) {
     }
 }
 
-async function get_user_by_username(username) {
+async function db_get_user_by_username(username) {
     try {
         await client.connect();
         const db = client.db(db_name);
-        const user = await db.collection('user').findOne({ Username: username });
+        const user = await db.collection('user').findOne(
+            { Username: username },
+            { projection: { _id: 0, Password: 0 } }
+        );
         return user;
     } catch (error) {
         console.error('Error fetching user:', error);
@@ -44,6 +47,6 @@ async function get_user_by_username(username) {
 
 module.exports = {
     get_users,
-    get_user_by_username,
+    db_get_user_by_username,
     create_user,
 };
