@@ -4,21 +4,13 @@ const url = 'mongodb://localhost:27017';
 const db_name = 'little_library';
 const client = new MongoClient(url);
 
-const get_users = async (req, res) => {
-    try {
-        const users = await user_model.get_users();
-        res.json(users);
-    } catch (error) {
-        console.error('Error fetching users:', error);
-        res.status(500).json({ message: 'Internal server error' });
-    }
-};
-
-async function create_user(user) {
+async function db_create_user(data) {
     try {
         await client.connect();
         const db = client.db(db_name);
-        const result = await db.collection('user').insertOne(user);
+        const result = await db.collection('user').insertOne(
+            data
+        );
         return result.insertedId;
     } catch (error) {
         console.error('Error creating user:', error);
@@ -28,13 +20,13 @@ async function create_user(user) {
     }
 }
 
-async function db_get_user_by_username(username) {
+async function db_get_user_by_id(user_id) {
     try {
         await client.connect();
         const db = client.db(db_name);
         const user = await db.collection('user').findOne(
-            { Username: username },
-            { projection: { _id: 0, Password: 0 } }
+            { _id: user_id },
+            { projection: { Password: 0 } }
         );
         return user;
     } catch (error) {
@@ -45,8 +37,43 @@ async function db_get_user_by_username(username) {
     }
 }
 
+async function db_delete_user_by_id(user_id) {
+    try {
+        await client.connect();
+        const db = client.db(db_name);
+        const result = await db.collection('user').deleteOne(
+            { _id: user_id }
+        );
+        return result.deletedCount === 1;
+    } catch (error) {
+        console.error('Error deleting user:', error);
+        throw error;
+    } finally {
+        await client.close();
+    }
+}
+
+async function db_update_user_by_id(user_id, updated_data) {
+    try {
+        await client.connect();
+        const db = client.db(db_name);
+        
+        const result = await db.collection('user').updateOne(
+            { _id: user_id },
+            { $set: updated_data }
+        );
+        return result;
+    } catch (error) {
+        console.error('Error updating user:', error);
+        throw error;
+    } finally {
+        await client.close();
+    }
+}
+
 module.exports = {
-    get_users,
-    db_get_user_by_username,
-    create_user,
+    db_get_user_by_id,
+    db_delete_user_by_id,
+    db_create_user,
+    db_update_user_by_id,
 };
