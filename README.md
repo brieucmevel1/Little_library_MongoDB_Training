@@ -4,47 +4,37 @@ This project aims to create a simple API for a "Little Library" application. The
 
 ## Project Structure
 
-### K6_test_for_api
-This directory contains performance testing scripts using K6 for the API.
+### 1: Utils Files
 
-- `create_usersK6.js`: Script to simulate creating users.
-- `delete_usersK6.js`: Script to simulate deleting users.
-- `get_usersK6.js`: Script to simulate getting users.
+- `db_tools.txt`: Text file to read before, containing project information and utils tools.
 
-### little_library_api
-This directory contains the core API implementation.
+- `setup_little_library.js`: Script to set up the Little Library.
+- `little_library.js`: Main file to start the api.
 
+### 2: little_library_console
+This directory contains console scripts for interacting with the Little Library, this could be usefull to continue this part according to the `db_tools.txt` file to get used to nodeJS.
+
+- `little_library_admin.js`: Console script for admin tasks.
+- `little_library_user.js`: Console script for user tasks.
+- `ll_delete_user.js`: Console script to delete a user.
+- `ll_get_answer.js`: Console script to get the answers from the shell.
+
+### 3: little_library_api 
+This directory contains the core API implementation using the same db but is very limited, this could be also util to continue this before doing tests.
+
+- `little_library_api.js`: Main API file to start the server.
+- `api_routes.js`: Define API routes and link them to the controller.
+- `api_controller.js`: Controller handling API logic.
 - `models`: Directory containing data models.
   - `book_model.js`: Model for books.
   - `podcast_model.js`: Model for podcasts.
   - `user_model.js`: Model for users.
 
-- `api_controller.js`: Controller handling API logic.
-- `api_routes.js`: Define API routes and link them to the controller.
-- `little_library_api.js`: Main API file to start the server.
+### K6_test_for_api
+This directory contains performance testing scripts using K6 for the API see to use Grafana to look to better results.
 
-### little_library_console
-This directory contains console scripts for interacting with the Little Library.
+- `create_usersK6.js`: Script to simulate creating users.
+- `delete_usersK6.js`: Script to simulate deleting users.
+- `get_usersK6.js`: Script to simulate getting users.
 
-- `little_library_admin.js`: Console script for admin tasks.
-- `little_library_user.js`: Console script for user tasks.
-- `ll_delete_user.js`: Console script to delete a user.
-- `ll_get_answer.js`: Console script to get an answer from the library.
-
-### Other Files
-
-- `db_tools.txt`: Text file containing database tools information.
-- `little_library.js`: Main library file.
-- `setup_little_library.js`: Script to set up the Little Library.
-
-## Getting Started
-
-1. Clone this repository to your local machine.
-2. Navigate to the `little_library_api` directory.
-3. Install dependencies using your preferred package manager (e.g., `npm install`).
-4. Run the API using the command: `node little_library_api.js`.
-5. You can now access the API at `http://localhost:3000`.
-
-Feel free to explore and modify the code to understand how the API and console scripts work together. If you have any questions or need assistance, don't hesitate to reach out for help.
-
-Happy coding!
+Good luck
