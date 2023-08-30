@@ -4,6 +4,8 @@ const url = 'mongodb://localhost:27017';
 const db_name = 'little_library';
 const client = new MongoClient(url);
 
+//the modele store and retreive data from the db in the right format
+
 async function db_create_user(data) {
     try {
         await client.connect();

@@ -3,17 +3,18 @@ const main_admin = require('./little_library_console/little_library_admin.js');
 const main_user = require('./little_library_console/little_library_user.js');
 const get_answer = require('./little_library_console/ll_get_answer.js');
 const main_api = require('./little_library_api/little_library_api.js');
-const readline = require('readline');
 
 const url = 'mongodb://localhost:27017';
 const db_name = 'little_library';
-
 const client = new MongoClient(url);
 
+const readline = require('readline');
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
+
+//start by switching to shell or api version
 
 async function main() {
     const role = await get_answer("What do you want to use? (console/api): ");

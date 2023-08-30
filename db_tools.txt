@@ -1,16 +1,28 @@
-term1:
-	sudo service mongod start
-	mongod --bind_ip_all
-term2:
-	mongosh
-	use little_library
+Test file with some usefull tips and plan for later
 
-	db.books.find()
-	db.user.find()
-	db.podcast.find()
-	
-	db.books.find({ "Year": { $gt: 2000 } })
-	db.books.find({ $and: [{ "Available": true }, { "Year": { $gt: 2000 } }] })
+//////
+
+to start the db:
+//////
+
+	term1:
+		sudo service mongod start
+
+	term2:
+		mongosh
+		use little_library
+
+		db.books.find()
+		db.user.find()
+		db.podcast.find()
+		
+		db.books.find({ "Year": { $gt: 2000 } })
+		db.books.find({ $and: [{ "Available": true }, { "Year": { $gt: 2000 } }] })
+
+//////
+
+some advanced requests
+//////
 
 db.users.aggregate([
   {
@@ -21,6 +33,8 @@ db.users.aggregate([
     }
   }
 ])
+
+/the one under does not work
 
 db.user.aggregate([
   {
@@ -37,8 +51,10 @@ db.user.aggregate([
   }
 ])
 
-controler appelle tt les models
+//////
 
+plan for the console part
+//////
 
 connection:
 	user:

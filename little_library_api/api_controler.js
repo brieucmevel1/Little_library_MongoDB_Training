@@ -3,15 +3,8 @@ const book_model = require('./models/book_model.js');
 const podcast_model = require('./models/podcast_model.js');
 const { ObjectId } = require('mongodb');
 
-// const get_users = async (req, res) => {
-//     try {
-//         const users = await user_model.get_users();
-//         res.json(users);
-//     } catch (error) {
-//         console.error('Error fetching users:', error);
-//         res.status(500).json({ message: 'Internal server error' });
-//     }
-// };
+//the controller receives and redirects the requests 
+//from the user to the model and vice versa and handles the errors
 
 const create_user = async (req, res) => {
     const data = req.body;
@@ -23,7 +16,6 @@ const create_user = async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 };
-
 
 const get_user_by_id = async (req, res) => {
     const { _id } = req.params;
@@ -72,7 +64,6 @@ const update_user_by_id = async (req, res) => {
 };
 
 module.exports = {
-    //get_users,
     get_user_by_id,
     delete_user_by_id,
     create_user,
